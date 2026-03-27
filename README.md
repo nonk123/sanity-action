@@ -2,7 +2,7 @@
 
 A GitHub composite-action that builds your website using [sanity](https://github.com/nonk123/sanity) fetched from the [latest stable release](https://github.com/nonk123/sanity/releases/latest).
 
-Here's a complete `publish.yml` workflow example [from my GitHub Pages website](https://github.com/nonk123/nonk.dev):
+Here's a complete [`publish.yml`](https://github.com/nonk123/nonk.dev/blob/fd8287454c469dd1685140a1d2db37a76244af70/.github/workflows/publish.yml) workflow example [from my GitHub Pages website](https://github.com/nonk123/nonk.dev):
 
 ```yml
 name: Publish to GitHub Pages
