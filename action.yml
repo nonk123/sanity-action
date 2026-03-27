@@ -17,7 +17,7 @@ runs:
   using: composite
   steps:
     - name: Setup Pages
-      uses: actions/configure-pages@v5
+      uses: actions/configure-pages@v6
       if: inputs.push
 
     - name: Choose a temporary path to house sanity
@@ -42,5 +42,5 @@ runs:
 
     - name: Publish to GitHub Pages
       id: publish
-      uses: actions/deploy-pages@v4
+      uses: actions/deploy-pages@v5
       if: inputs.push
