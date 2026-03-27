@@ -29,7 +29,7 @@ runs:
       shell: bash
       run: wget $SANITY_URL -O ${{ steps.choose-tmp.outputs.path }} && chmod +x ${{ steps.choose-tmp.outputs.path }}
       env:
-        SANITY_URL: https://github.com/nonk123/sanity/releases/latest/download/sanity-linux,
+        SANITY_URL: https://github.com/nonk123/sanity/releases/latest/download/sanity-linux
 
     - name: Render the website
       shell: bash
