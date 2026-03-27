@@ -23,7 +23,7 @@ runs:
     - name: Choose a temporary path to house sanity
       id: choose-tmp
       shell: bash
-      run: echo -n "path=$(mktemp $RUNNER_TEMP/sanity.XXXXXX)" > $GITHUB_OUTPUT
+      run: echo "path=$(mktemp $RUNNER_TEMP/sanity.XXXXXX)" >> $GITHUB_OUTPUT
 
     - name: Download sanity
       shell: bash
