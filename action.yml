@@ -27,13 +27,13 @@ runs:
 
     - name: Download sanity
       shell: bash
-      run: wget $SANITY_URL -O ${{ steps.choose-tmp.path }} && chmod +x ${{ steps.choose-tmp.path }}
+      run: wget $SANITY_URL -O ${{ steps.choose-tmp.outputs.path }} && chmod +x ${{ steps.choose-tmp.outputs.path }}
       env:
         SANITY_URL: https://github.com/nonk123/sanity/releases/latest/download/sanity-linux,
 
     - name: Render the website
       shell: bash
-      run: env RUST_LOG=debug ${{ steps.choose-tmp.path }}
+      run: env RUST_LOG=debug ${{ steps.choose-tmp.outputs.path }}
 
     - name: Upload GitHub Pages artifact
       uses: actions/upload-pages-artifact@v4
