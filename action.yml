@@ -2,9 +2,24 @@ name: sanity
 description: Render your website using sanity
 author: nonk123
 
+inputs:
+  push:
+    description: Also push the website to GitHub pages?
+    default: "false"
+    required: false
+
+outputs:
+  page_url: # _ instead of - for actions/deploy-pages compatibility
+    description: Output page URL if `push` was set to `true`
+    value: ${{ inputs.push && steps.publish.outputs.page_url || '' }}
+
 runs:
   using: composite
   steps:
+    - name: Setup Pages
+      uses: actions/configure-pages@v5
+      if: inputs.push
+
     - name: Choose a temporary path to house sanity
       id: choose-tmp
       shell: bash
@@ -19,3 +34,13 @@ runs:
     - name: Render the website
       shell: bash
       run: env RUST_LOG=debug ${{ steps.choose-tmp.path }}
+
+    - name: Upload GitHub Pages artifact
+      uses: actions/upload-pages-artifact@v4
+      with: { path: dist }
+      if: inputs.push
+
+    - name: Publish to GitHub Pages
+      id: publish
+      uses: actions/deploy-pages@v4
+      if: inputs.push

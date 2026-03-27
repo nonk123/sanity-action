@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-24.04
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.publish.outputs.page_url }}
     permissions:
       contents: read
       pages: write
@@ -29,14 +29,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Render
+      - name: Publish
+        id: publish
         uses: nonk123/sanity-action@master # this action being used
-      - name: Upload GitHub Pages artifact
-        uses: actions/upload-pages-artifact@v4
-        with: { path: dist }
-      - name: Publish to GitHub Pages
-        uses: actions/deploy-pages@v4
-        id: deployment
+        with: { push: true }
 ```
