@@ -1,0 +1,21 @@
+name: sanity
+description: Render your website using sanity
+author: nonk123
+
+runs:
+  using: composite
+  steps:
+    - name: Choose a temporary path to house sanity
+      id: choose-tmp
+      shell: bash
+      run: echo -n "path=$(mktemp $RUNNER_TEMP/sanity.XXXXXX)" > $GITHUB_OUTPUT
+
+    - name: Download sanity
+      shell: bash
+      run: wget $SANITY_URL -O ${{ steps.choose-tmp.path }} && chmod +x ${{ steps.choose-tmp.path }}
+      env:
+        SANITY_URL: https://github.com/nonk123/sanity/releases/latest/download/sanity-linux,
+
+    - name: Render the website
+      shell: bash
+      run: env RUST_LOG=debug ${{ steps.choose-tmp.path }}
