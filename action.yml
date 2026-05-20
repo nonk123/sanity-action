@@ -9,7 +9,8 @@ inputs:
     required: false
 
 outputs:
-  page_url: # _ instead of - for actions/deploy-pages compatibility
+  page_url:
+    # _ instead of - for actions/deploy-pages compatibility
     description: Output page URL if `push` was set to `true`
     value: ${{ inputs.push && steps.publish.outputs.page_url || '' }}
 
@@ -31,7 +32,8 @@ runs:
         wget -nv $SANITY_URL -O ${{ steps.choose-tmp.outputs.path }} \
           && chmod +x ${{ steps.choose-tmp.outputs.path }}
       env:
-        SANITY_URL: https://github.com/nonk123/sanity/releases/latest/download/sanity-${{ runner.os == 'Windows' && 'windows.exe' || 'linux' }}
+        SANITY_URL: https://github.com/nonk123/sanity/releases/latest/download/sanity-${{
+          runner.os == 'Windows' && 'windows.exe' || 'linux' }}
 
     - name: Render the website
       shell: bash
