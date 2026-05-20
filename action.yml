@@ -6,13 +6,23 @@ inputs:
   push:
     description: Also push the website to GitHub pages?
     default: "false"
-    required: false
+
+  neocities_secret:
+    description: |
+      WARNING: this nukes your Neocities site's contents and replaces them with the output of sanity.
+
+      Set this to your Neocities API key to push to Neocities. Refer to <https://github.com/bcomnes/deploy-to-neocities> for instructions on how to obtain one.
+
+  neocities_supporter:
+    description: Set this to true if you are a Neocities Supporter. Bypasses certain
+      (unspecified) file limits.
+    default: "false"
 
 outputs:
   page_url:
     # _ instead of - for actions/deploy-pages compatibility
     description: Output page URL if `push` was set to `true`
-    value: ${{ inputs.push && steps.publish.outputs.page_url || '' }}
+    value: ${{ inputs.push && steps.publish-ghp.outputs.page_url || '' }}
 
 runs:
   using: composite
@@ -45,6 +55,16 @@ runs:
       if: inputs.push
 
     - name: Publish to GitHub Pages
-      id: publish
+      id: publish-ghp
       uses: actions/deploy-pages@v5
       if: inputs.push
+
+    - name: Publish to Neocities
+      uses: bcomnes/deploy-to-neocities@v3
+      if: inputs.neocities_secret
+      with:
+        api_key: ${{ inputs.neocities_secret }}
+        neocities_supporter: ${{ inputs.neocities_supporter }}
+        cleanup: true
+        preview_before_deploy: true
+        dist_dir: dist
