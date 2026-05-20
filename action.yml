@@ -1,5 +1,6 @@
 name: sanity
-description: Render your website using sanity
+description: Render your website with sanity and optionally push it to GitHub
+  Pages and/or Neocities
 author: nonk123
 
 inputs:
