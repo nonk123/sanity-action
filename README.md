@@ -25,16 +25,6 @@ Then, run your `sanity-action` step as follows to deploy to Neocities:
 
 ### Push to [GitHub Pages](https://pages.github.com)
 
-Run with `push_to_github_pages` set to true to push to GitHub pages:
-
-```yml
-- name: Publish
-  id: publish
-  uses: nonk123/sanity-action@master
-  with:
-    push_to_github_pages: true
-```
-
 You will need to set additional permissions for the GitHub token used in the CI workflow, or else deployment will fail. Here's a job example with those permissions set:
 
 ```yml
@@ -50,6 +40,16 @@ jobs:
       id-token: write
     steps:
       - # ...
+```
+
+After getting the permissions, run with `push_to_github_pages` set to true to push to GitHub pages:
+
+```yml
+- name: Publish
+  id: publish
+  uses: nonk123/sanity-action@master
+  with:
+    push_to_github_pages: true
 ```
 
 ### Complete Workflow Example
