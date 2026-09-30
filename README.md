@@ -46,6 +46,7 @@ jobs:
       url: ${{ steps.publish.outputs.page_url }}
 
     permissions:
+      contents: read
       pages: write
       id-token: write
 
